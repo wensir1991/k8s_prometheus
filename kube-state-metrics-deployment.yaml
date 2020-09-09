@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-state-metrics
-  namespace: ops
+  namespace: kube-system
   labels:
     k8s-app: kube-state-metrics
     kubernetes.io/cluster-service: "true"
@@ -79,7 +79,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kube-state-metrics-config
-  namespace: ops
+  namespace: kube-system
   labels:
     k8s-app: kube-state-metrics
     kubernetes.io/cluster-service: "true"

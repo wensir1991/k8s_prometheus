@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: prometheus 
-  namespace: ops
+  namespace: kube-system
   labels:
     k8s-app: prometheus
     kubernetes.io/cluster-service: "true"
     addonmanager.kubernetes.io/mode: Reconcile
-    version: v2.20.0
+    version: v2.2.1
 spec:
   serviceName: "prometheus"
   replicas: 1
@@ -55,7 +55,7 @@ spec:
               memory: 10Mi
 
         - name: prometheus-server
-          image: "prom/prometheus:v2.20.0"
+          image: "prom/prometheus:v2.2.1"
           imagePullPolicy: "IfNotPresent"
           args:
             - --config.file=/etc/config/prometheus.yml
