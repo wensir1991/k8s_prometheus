@@ -8,20 +8,26 @@ metadata:
     addonmanager.kubernetes.io/mode: EnsureExists
 data:
   alertmanager.yml: |
-    global: 
+    global:
       resolve_timeout: 5m
-      smtp_smarthost: 'smtp.163.com:25'
-      smtp_from: 'baojingtongzhi@163.com'
-      smtp_auth_username: 'baojingtongzhi@163.com'
-      smtp_auth_password: 'NCKBJTSASSXMRQBM'
-
     receivers:
-    - name: default-receiver
-      email_configs:
-      - to: "zhenliang369@163.com"
-
+    - name: wechat
+      wechat_configs:
+      - agent_id: "100000x"
+        api_secret: Nm7PRrxxxxG8EpkyWuXDAWMLmFo
+        corp_id: wwf9d3833cd2323ewdd
+        send_resolved: true
+        to_user: Joker
     route:
-      group_interval: 1m
-      group_wait: 10s
-      receiver: default-receiver
-      repeat_interval: 1m
+      group_by:
+      - job
+      group_interval: 5m
+      group_wait: 30s
+      receiver: wechat
+      repeat_interval: 12h
+      routes:
+      - match:
+          alertname: Watchdog
+        receiver: wechat
+    templates:
+    - /etc/alertmanager/config/template.tmp1
